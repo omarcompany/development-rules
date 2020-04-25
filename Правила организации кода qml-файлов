@@ -1,0 +1,45 @@
+Код в qml-файлах должен быть организован в таком порядке:
+   1. сначала идет список всех свойств и функций, тех что доступны снаружи 
+   2 Затем идет список свойств и функций который используются только внутри компонента
+   Пример:
+   
+   property alias value
+   property string iconSource
+   
+   function getValue() {
+       return value
+   }
+      
+   property int _fontSize
+   property string _headerText
+   
+   2. Далее идут все функции и свойства которые используются только внутри компонента но с префмиксом _
+   
+   property string _text
+   
+   function _getText() {
+        return text
+   }
+
+   Общий вид выглядит примерно так:
+   
+   Item {
+        property alias value
+        property string iconSource
+   
+        function getValue() {
+            return value
+        }
+        
+        property string _text
+   
+        function _getText() {
+            return text
+        }
+   }
+   3. После описываются все сигналы общие и обработка сигналов компонента
+   4. После них уже располагаются компоненты отрисовки
+        Rectangle {}
+   5. Далее идут компоненты не относящиеся к интферфейсу,
+   например DataModel {id: data}
+   
